@@ -1,0 +1,7 @@
+streamlit
+fastapi
+uvicorn
+openai
+llama-index
+transformers
+python-dotenv
