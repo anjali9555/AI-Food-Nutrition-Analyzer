@@ -12,7 +12,7 @@ Ek advanced web application jo AI ka use karke food items ka detailed nutritiona
 ## Tech Stack
 * **Frontend**: Streamlit
 * **Backend**: FastAPI (Python)
-* **AI Engine**: Groq API (Llama 3.1)
+* **AI Engine**: OpenAI API (Llama 3.1)
 * **Framework**: LlamaIndex
 
 ## Setup Instructions
