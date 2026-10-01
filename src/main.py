@@ -1,33 +1,22 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
-from src.ai_model import get_nutrition_info
-from src.ai_model import query_nutrition_knowledge
+from src.ai_model import get_nutrition_info, query_nutrition_knowledge
 
-app = FastAPI()
+app = FastAPI(title="Nutrition Analyzer API", version="1.0.0")
 
 @app.get("/")
 async def root():
-    return {"message": "AI-Based Food Nutrition Analyzer is running!"}
+    return {"status": "success", "message": "API is running securely!"}
 
 @app.get("/analyze/{food_item}")
 async def analyze_food(food_item: str):
-    """
-    Get structured nutrition info for a food item.
-    """
     result = get_nutrition_info(food_item)
-
-    # Formatting output properly for better JSON readability
-    structured_response = {
-        "food": food_item,
-        "nutrition_info": result.replace("\n", " ")  # Remove \n for cleaner JSON
-    }
-
-    return JSONResponse(content=structured_response, status_code=200)
+    if not result:
+        raise HTTPException(status_code=500, detail="Failed to fetch nutrition data from AI.")
+    
+    return JSONResponse(content={"food": food_item, "data": result}, status_code=200)
 
 @app.get("/ask/{question}")
 async def ask_nutrition_question(question: str):
-    """
-    Ask a free-form nutrition question based on uploaded docs.
-    """
     result = query_nutrition_knowledge(question)
     return {"question": question, "answer": result}

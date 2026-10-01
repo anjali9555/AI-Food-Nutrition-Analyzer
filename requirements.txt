@@ -1,7 +1,10 @@
-streamlit
 fastapi
 uvicorn
-openai
+streamlit
 llama-index
-transformers
+llama-index-llms-groq
+llama-index-embeddings-huggingface
+groq
 python-dotenv
+loguru
+setuptools<70.0.0
